@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Поиск водоёма для рыбалки</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Oswald:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Inter',system-ui,sans-serif;color:#1B2B33;background:#fff}
+a{color:#0A7B97}a:hover{color:#075E75}
+button,input{font-family:inherit}
+input::placeholder{color:#6B7A82}
+</style>
+</helmet>
+<div style="width:100%;background:#fff;font-family:'Inter',system-ui,sans-serif;color:#1B2B33">
+
+<!-- Шапка -->
+<header style="background:linear-gradient(120deg,#06283A 0%,#0B4F6A 55%,#0C6B73 100%)">
+<div style="max-width:1240px;margin:0 auto;padding:0 24px;box-sizing:border-box;height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+<a href="Main.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff">
+<svg width="40" height="28" viewBox="0 0 40 28" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14c6-9 15-10 24-5l8-5-2 10 2 10-8-5c-9 5-18 4-24-5z"></path><circle cx="10" cy="12" r="1" fill="#fff"></circle></svg>
+<span style="font-family:'Oswald',sans-serif;font-weight:500;font-size:19px;line-height:1;letter-spacing:.02em;text-transform:uppercase">Все<br>водоемы</span>
+</a>
+<button type="button" style="height:44px;padding:0 24px;border-radius:999px;border:0;background:#EEF3F5;color:#0A7B97;font-size:15px;font-weight:600;cursor:pointer">Войти</button>
+</div>
+</header>
+
+<!-- Поиск -->
+<div style="background:linear-gradient(120deg,#06283A 0%,#0B4F6A 55%,#0C6B73 100%);padding:8px 0 44px">
+<div style="max-width:1240px;margin:0 auto;padding:0 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+<h1 style="margin:0;font-family:'Oswald',sans-serif;font-weight:500;font-size:44px;line-height:1.1;color:#F5A524">Найди своё идеальное место для рыбалки</h1>
+<form onSubmit="{{noop}}" style="display:flex;flex-wrap:wrap;gap:12px;align-items:stretch">
+<label style="flex:1.4 1 260px;min-width:0;display:flex;align-items:center;gap:12px;height:60px;padding:0 22px;border-radius:999px;background:#fff;box-sizing:border-box;cursor:text">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A7B97" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.200-7-11.500a7 7 0 0 1 14 0C19 14.800 12 21 12 21z"></path><circle cx="12" cy="9.500" r="2.500"></circle></svg>
+<span style="display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.3"><span style="font-size:12px;color:#5A6B73">Место</span><input type="text" placeholder="Регион, город или водоём" style="border:0;outline:0;padding:0;font-size:16px;font-weight:600;color:#1B2B33;background:transparent;width:100%"></span>
+</label>
+<button type="button" style="flex:1 1 220px;min-width:0;display:flex;align-items:center;gap:12px;height:60px;padding:0 22px;border-radius:999px;border:0;background:#fff;box-sizing:border-box;cursor:pointer;text-align:left">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A7B97" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+<span style="display:flex;flex-direction:column;line-height:1.3"><span style="font-size:12px;color:#5A6B73">Даты</span><span style="font-size:16px;font-weight:600;color:#1B2B33">24–28 августа</span></span>
+</button>
+<button type="button" style="flex:1.2 1 240px;min-width:0;display:flex;align-items:center;gap:12px;height:60px;padding:0 22px;border-radius:999px;border:0;background:#fff;box-sizing:border-box;cursor:pointer;text-align:left">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A7B97" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14c4-7 11-8 18-3l-3 3 3 3c-7 5-14 4-18-3z"></path></svg>
+<span style="display:flex;flex-direction:column;line-height:1.3;min-width:0"><span style="font-size:12px;color:#5A6B73">Виды рыб</span><span style="font-size:16px;font-weight:600;color:#1B2B33;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{fishSummary}}</span></span>
+</button>
+<button type="submit" style="flex:0 1 220px;height:60px;padding:0 32px;border-radius:999px;border:0;background:#E8710A;color:#fff;font-size:19px;font-weight:700;cursor:pointer">Найти водоём</button>
+</form>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+<span style="font-size:15px;color:#D5E6EC;margin-right:4px">Выберите рыбу:</span>
+<sc-for list="{{fishChips}}" as="f" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{f.on}}" onClick="{{f.toggle}}" style="height:40px;padding:0 18px;border-radius:999px;border:1.500px solid {{f.border}};background:{{f.bg}};color:{{f.color}};font-size:15px;font-weight:600;cursor:pointer">{{f.name}}</button>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- Результаты -->
+<div style="max-width:1240px;margin:0 auto;padding:40px 24px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:24px">
+
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px">
+<h2 style="margin:0;font-family:'Oswald',sans-serif;font-weight:400;font-size:32px;color:#0A7B97">Найдено водоёмов: {{count}}</h2>
+<span style="font-size:15px;color:#5A6B73">Крым · 24–28 августа</span>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start">
+
+<!-- Карточки -->
+<div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div style="border-radius:24px;background:#F1F7F9;padding:40px 24px;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center">
+<b style="font-size:20px">Ничего не нашлось</b>
+<span style="font-size:16px;color:#5A6B73;max-width:380px">Для выбранных видов рыбы нет свободных водоёмов. Попробуйте убрать часть фильтров.</span>
+</div>
+</sc-if>
+<sc-for list="{{places}}" as="p" hint-placeholder-count="6">
+<article style="display:flex;flex-wrap:wrap;border-radius:24px;border:2px solid {{p.border}};background:#fff;overflow:hidden;box-shadow:{{p.shadow}}">
+<div style="flex:1 1 200px;min-height:200px;background:{{p.photoBg}};display:flex;gap:8px;padding:12px;box-sizing:border-box;align-items:flex-start;flex-wrap:wrap;align-content:flex-start">
+<sc-for list="{{p.tagList}}" as="t" hint-placeholder-count="2">
+<span style="background:{{t.bg}};color:#fff;font-size:12px;font-weight:600;padding:4px 12px;border-radius:999px">{{t.t}}</span>
+</sc-for>
+</div>
+<div style="flex:2 1 280px;min-width:0;padding:20px 24px;display:flex;flex-direction:column;gap:12px;box-sizing:border-box">
+<div style="display:flex;flex-direction:column;gap:4px">
+<h3 style="margin:0;font-size:20px;font-weight:700;line-height:1.25">{{p.name}}</h3>
+<span style="font-size:14px;color:#5A6B73">{{p.region}} · секторов: {{p.sectors}}</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;font-size:15px;color:#33444D">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A7B97" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M3 14c4-7 11-8 18-3l-3 3 3 3c-7 5-14 4-18-3z"></path></svg>
+<span>{{p.fishText}}</span>
+</div>
+<div style="display:flex;align-items:center;gap:10px;font-size:15px;color:#33444D">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A7B97" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>
+<span>{{p.infra}}</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:8px">
+<span style="font-family:'Oswald',sans-serif;font-weight:500;font-size:24px;color:#0A7B97">{{p.priceText}}</span>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<button type="button" onClick="{{p.pick}}" style="height:44px;padding:0 18px;border-radius:999px;border:1.500px solid #0A7B97;background:{{p.mapBg}};color:{{p.mapColor}};font-size:14px;font-weight:600;cursor:pointer">На карте</button>
+<a href="Main.dc.html" style="height:44px;padding:0 22px;border-radius:999px;background:#E8710A;color:#fff;font-size:15px;font-weight:700;text-decoration:none;display:flex;align-items:center;box-sizing:border-box">Выбрать сектор</a>
+</div>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+
+<!-- Карта -->
+<div style="flex:1 1 440px;min-width:0;position:sticky;top:24px;align-self:flex-start">
+<div style="position:relative;height:680px;border-radius:24px;background:#E6F0EC;overflow:hidden;border:1px solid #D2E0DA">
+<div style="position:absolute;left:8%;top:12%;width:34%;height:20%;border-radius:50%;background:#B9DCEB;transform:rotate(-14deg)"></div>
+<div style="position:absolute;left:52%;top:40%;width:40%;height:26%;border-radius:46% 54% 50% 50%;background:#B9DCEB;transform:rotate(18deg)"></div>
+<div style="position:absolute;left:6%;top:58%;width:30%;height:22%;border-radius:50%;background:#B9DCEB;transform:rotate(8deg)"></div>
+<div style="position:absolute;left:56%;top:78%;width:32%;height:14%;border-radius:50%;background:#B9DCEB"></div>
+<div style="position:absolute;left:-5%;top:48%;width:110%;height:4px;background:#F7F3E8;transform:rotate(-8deg)"></div>
+<div style="position:absolute;left:40%;top:-5%;width:4px;height:110%;background:#F7F3E8;transform:rotate(12deg)"></div>
+<div style="position:absolute;left:16px;top:16px;background:#fff;border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:#33444D;box-shadow:0 2px 8px rgba(6,40,58,.15)">Карта водоёмов</div>
+<sc-for list="{{places}}" as="p" hint-placeholder-count="6">
+<button type="button" aria-label="{{p.pinLabel}}" onClick="{{p.pick}}" style="position:absolute;left:{{p.x}};top:{{p.y}};transform:translate(-50%,-100%);border:0;padding:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;z-index:{{p.z}}">
+<span style="background:{{p.pinBg}};color:{{p.pinColor}};font-size:14px;font-weight:700;padding:7px 14px;border-radius:999px;box-shadow:0 4px 12px rgba(6,40,58,.3);white-space:nowrap;border:2px solid #fff">{{p.pinText}}</span>
+<span style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:9px solid {{p.pinBg}};margin-top:-1px"></span>
+</button>
+</sc-for>
+<div style="position:absolute;left:16px;right:16px;bottom:16px;background:#fff;border-radius:20px;padding:16px 20px;box-shadow:0 8px 32px rgba(10,60,80,.2);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;box-sizing:border-box">
+<div style="display:flex;flex-direction:column;gap:2px;min-width:0"><b style="font-size:16px">{{cur.name}}</b><span style="font-size:14px;color:#5A6B73">{{cur.fishText}}</span></div>
+<a href="Main.dc.html" style="height:44px;padding:0 22px;border-radius:999px;background:#E8710A;color:#fff;font-size:15px;font-weight:700;text-decoration:none;display:flex;align-items:center;box-sizing:border-box">Подробнее</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- Подвал -->
+<footer style="background:#0B7391;color:#fff">
+<div style="max-width:1240px;margin:0 auto;padding:40px 24px;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:24px 48px;justify-content:space-between;align-items:flex-end">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:10px">
+<svg width="40" height="28" viewBox="0 0 40 28" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14c6-9 15-10 24-5l8-5-2 10 2 10-8-5c-9 5-18 4-24-5z"></path><circle cx="10" cy="12" r="1" fill="#fff"></circle></svg>
+<span style="font-family:'Oswald',sans-serif;font-weight:500;font-size:19px;line-height:1;letter-spacing:.02em;text-transform:uppercase">Все<br>водоемы</span>
+</div>
+<span style="font-size:14px">© 2026 Всеводоёмы</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,auto);gap:12px 56px;font-size:14px">
+<a href="Main.dc.html" style="color:#fff;text-decoration:none">Владельцам водоёмов</a>
+<a href="Main.dc.html" style="color:#fff;text-decoration:none">Политика конфиденциальности</a>
+<a href="Main.dc.html" style="color:#fff;text-decoration:none">Энциклопедия</a>
+<a href="Main.dc.html" style="color:#fff;text-decoration:none">Соглашения</a>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sel: 1, fish: [] };
+  }
+  renderVals() {
+    const sel = this.state.sel;
+    const chosen = this.state.fish;
+    const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    const fishAll = ['Сом', 'Карп', 'Тарань', 'Щука', 'Судак', 'Карась'];
+    const tagBg = { 'Рекреационный': '#0A7BB8', 'Спортивный': '#1F4E9E', 'Платный': '#C75400', 'Бесплатный': '#2D7A12' };
+    const base = [
+      { id: 1, name: 'Демьяновский водоём', region: 'Крым', tags: ['Рекреационный', 'Платный'], fish: ['Сом', 'Карп', 'Тарань'], infra: 'Беседки, мангалы, причалы', price: 1200, sectors: 6, x: 30, y: 34, photo: 'linear-gradient(160deg,#1C7FA0,#6FA14A)' },
+      { id: 2, name: 'Петькина речка', region: 'Крым', tags: ['Спортивный', 'Платный'], fish: ['Сом', 'Карп', 'Тарань'], infra: 'Удобный подъезд, разнообразная кухня, аренда снастей', price: 1500, sectors: 8, x: 66, y: 30, photo: 'linear-gradient(160deg,#0E6E87,#3E9C73)' },
+      { id: 3, name: 'Симферопольское водохранилище', region: 'Крым', tags: ['Рекреационный', 'Бесплатный'], fish: ['Сом', 'Карп', 'Тарань'], infra: 'Удобный подъезд', price: 0, sectors: 12, x: 72, y: 56, photo: 'linear-gradient(160deg,#2386B0,#4BA283)' },
+      { id: 4, name: 'Озеро «Тихое»', region: 'Крым', tags: ['Рекреационный', 'Платный'], fish: ['Щука', 'Судак', 'Карась'], infra: 'Беседки, мангалы', price: 1000, sectors: 4, x: 20, y: 66, photo: 'linear-gradient(160deg,#1C7FA0,#3E9C73)' },
+      { id: 5, name: 'Пруд «Лесной»', region: 'Крым', tags: ['Спортивный', 'Платный'], fish: ['Карп', 'Карась'], infra: 'Причалы, аренда снастей', price: 1800, sectors: 5, x: 48, y: 76, photo: 'linear-gradient(160deg,#3E9C73,#B7A24A)' },
+      { id: 6, name: 'Водоём «Заречный»', region: 'Крым', tags: ['Рекреационный', 'Платный'], fish: ['Щука', 'Судак', 'Сом'], infra: 'Беседки, кран с пивом', price: 1400, sectors: 7, x: 80, y: 82, photo: 'linear-gradient(160deg,#0E6E87,#1C9CCB)' }
+    ];
+    const toggleFish = (name) => {
+      const cur = this.state.fish;
+      this.setState({ fish: cur.includes(name) ? cur.filter((f) => f !== name) : cur.concat([name]) });
+    };
+    const fishChips = fishAll.map((name) => {
+      const on = chosen.includes(name);
+      return {
+        name: name,
+        on: on,
+        bg: on ? '#F5A524' : 'rgba(255,255,255,0.1)',
+        color: on ? '#1B2B33' : '#FFFFFF',
+        border: on ? '#F5A524' : 'rgba(255,255,255,0.55)',
+        toggle: () => toggleFish(name)
+      };
+    });
+    const filtered = base.filter((p) => chosen.length === 0 || chosen.some((f) => p.fish.includes(f)));
+    const places = filtered.map((p) => {
+      const on = p.id === sel;
+      const priceText = p.price === 0 ? 'Бесплатно' : 'от ' + fmt(p.price) + ' ₽/сутки';
+      const pinText = p.price === 0 ? 'Бесплатно' : fmt(p.price) + ' ₽';
+      return {
+        id: p.id,
+        name: p.name,
+        region: p.region,
+        sectors: p.sectors,
+        fishText: p.fish.join(', '),
+        infra: p.infra,
+        priceText: priceText,
+        tagList: p.tags.map((t) => ({ t: t, bg: tagBg[t] })),
+        photoBg: p.photo,
+        border: on ? '#0A7B97' : '#DCE7EC',
+        shadow: on ? '0 8px 28px rgba(10,123,151,.22)' : 'none',
+        mapBg: on ? '#0A7B97' : '#FFFFFF',
+        mapColor: on ? '#FFFFFF' : '#0A7B97',
+        x: p.x + '%',
+        y: p.y + '%',
+        z: on ? 5 : 1,
+        pinText: pinText,
+        pinLabel: p.name + ', ' + pinText,
+        pinBg: on ? '#0A7B97' : '#FFFFFF',
+        pinColor: on ? '#FFFFFF' : '#0A7B97',
+        pick: () => this.setState({ sel: p.id })
+      };
+    });
+    const curBase = filtered.find((p) => p.id === sel) || filtered[0] || base[0];
+    return {
+      noop: (e) => { if (e && e.preventDefault) e.preventDefault(); },
+      fishChips: fishChips,
+      fishSummary: chosen.length ? chosen.join(', ') : 'Любые',
+      places: places,
+      count: filtered.length,
+      empty: filtered.length === 0,
+      cur: { name: curBase.name, fishText: curBase.fish.join(', ') }
+    };
+  }
+}
+</script>
+</body>
+</html>
